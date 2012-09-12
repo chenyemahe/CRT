@@ -8,6 +8,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:scaleType="fitXY"
+            android:contentDescription="@string/null_string"
             android:src="@drawable/launch_image1" />
 
     </LinearLayout>
