@@ -23,6 +23,8 @@
         
         <activity
             android:name=".LoginActivity" />
+        <activity
+            android:name=".MainPageActivity"/>
     </application>
 
 </manifest>
