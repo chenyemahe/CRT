@@ -10,4 +10,9 @@
 	<string name="button_skip">SKIP</string>
 	<string name="button_login">Log In</string>
 	<string name="button_register">Register</string>
+	<string name="search_zip">Zip : </string>
+	<string name="search_city">City : </string>
+	<string name="find_by_location">Find by Location : </string>
+	<string name="location_search">Search</string>
+	<string name="place_api_key"></string>
 </resources>
