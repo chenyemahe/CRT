@@ -11,6 +11,8 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import android.content.Context;
 import android.net.Uri;
@@ -56,8 +58,8 @@ public class RestaurantFinder{
 
 		@Override
 		public void run() {
-			String url = convertURL(placeSearch_xml + search_type + location + sensor_true + api_key);
-			String strResult = "";
+			String url = convertURL(placeSearch_json + search_type + location + sensor_true + api_key);
+			JSONArray strResult = null;
 
 			HttpGet get = new HttpGet(url);
 			
@@ -71,15 +73,17 @@ public class RestaurantFinder{
 				httpResponse = httpClient.execute(get);
 
 				if (httpResponse.getStatusLine().getStatusCode() == 200) {
-					strResult = EntityUtils.toString(httpResponse.getEntity());
+					strResult = (JSONArray) httpResponse.getEntity();
 				}
 			} catch (Exception e) {
 				return;
 			}
 
-			if (-1 == strResult.indexOf("<status>OK</status>")) {
+			if (strResult == null) {
 				Toast.makeText(context, "Can't get result!", Toast.LENGTH_SHORT).show();
 				return;
+			}else{
+				
 			}
 			
 		}

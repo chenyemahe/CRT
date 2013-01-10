@@ -3,6 +3,7 @@ package com.google.chineserestaurant;
 import com.google.chineserestaurant.locationHelper.LocationHelper;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +30,7 @@ public class MainPageActivity extends Activity implements OnClickListener{
 			case R.id.location_search:
 				LocationHelper my = new LocationHelper(this);
 				my.restaurantLocation(zip.getText().toString());
+				startActivity(new Intent(this,MapViewActivity.class));
 				break;
 		}
 		

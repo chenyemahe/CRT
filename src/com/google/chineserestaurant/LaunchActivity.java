@@ -1,32 +1,30 @@
 package com.google.chineserestaurant;
 
+import com.google.chineserestaurant.util.Util;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 public class LaunchActivity extends Activity{
-
-	//private final static String TAG = "Launch_Page";
-	private final static String title = "Loading....";
-	private Activity my = this;
-	private final static int time = 2500;
 	
+    private Activity mActivity;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);	
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.launch_activity);
-		setTitle(title);
+		mActivity = this;
 		Handler x = new Handler();
-		x.postDelayed(new loginActivity(), time);
+		x.postDelayed(new StartLoginActivity(), Util.Lauch_Show_Time);
 	}
 	
-	private class loginActivity implements Runnable{
+	private class StartLoginActivity implements Runnable{
 
 		@Override
 		public void run() {
 			startActivity(new Intent(getApplication(),LoginActivity.class));
-			my.finish();
+			mActivity.finish();
 		}
 	}
 }
