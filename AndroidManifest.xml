@@ -29,12 +29,13 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize" >
+            android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
         <activity android:name=".MainPageActivity" 
-            android:windowSoftInputMode="stateVisible|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity android:name=".MapViewActivity" />
         <activity android:name=".RegisterActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/Register_Activity" />
     </application>
 

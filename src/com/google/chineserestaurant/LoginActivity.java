@@ -1,7 +1,5 @@
 package com.google.chineserestaurant;
 
-import com.google.chineserestaurant.util.Util;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -67,23 +65,27 @@ public class LoginActivity extends Activity implements OnClickListener {
         String userNameInfo = userName.getText().toString();
         String passwordInfo = password.getText().toString();
         if (userNameInfo == null || userNameInfo.equals("")) {
-            Toast.makeText(this, Util.Log_In_No_User_Name_Input, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.log_in_no_user_name_input), Toast.LENGTH_LONG).show();
             return;
         }
         if (passwordInfo == null || passwordInfo.equals("")) {
-            Toast.makeText(this, Util.Log_In_No_Password_Input, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.log_in_no_password_input), Toast.LENGTH_LONG).show();
             return;
         }
         if (hasUserInfo(userNameInfo, passwordInfo)) {
-
+            Intent intent = new Intent(this, MainPageActivity.class);
+            intent.putExtra(getResources().getString(R.string.intent_user_log_in), true);
+            intent.putExtra(getResources().getString(R.string.intent_user_name), userNameInfo);
+            intent.putExtra(getResources().getString(R.string.intent_password), passwordInfo);
+            startActivity(intent);
         } else {
-            Toast.makeText(this, Util.Log_In_No_User_Info_Found, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.log_in_no_user_info_found), Toast.LENGTH_LONG).show();
         }
     }
 
     private boolean hasUserInfo(String userNameInfo, String passwordInfo) {
         //TODO:check remote database for user info
-        return false;
+        return true;
     }
 
     private void register() {

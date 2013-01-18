@@ -7,9 +7,10 @@
     <string name="null_string"></string>
     <string name="user_name">Email Address: </string>
 	<string name="password">Password: </string>
+    <string name="register_user_name">* Email Address: </string>
+    <string name="register_password">* Password: </string>
 	<string name="register_title">Register Your Information</string>
 	<string name="register_sub_title">Information followed by * is needed</string>
-	<string name="need_info_icon"> * </string>
 	<string name="first_name">First Name:</string>
     <string name="last_name">Last Name:</string>
     <string name="zip">ZIP Code:</string>
@@ -22,5 +23,15 @@
 	<string name="search_city">City : </string>
 	<string name="find_by_location">Find by Location : </string>
 	<string name="location_search">Search</string>
-	<string name="place_api_key"></string>
+	<string name="map_api_key">0oaHlo8iXt0sZhjuz3r-LvTcQ2-oCZcEl9gMTiQ</string>
+	
+	<string name="log_in_no_user_name_input">Please type your User Name!</string>
+    <string name="log_in_no_password_input">Please type your Password!</string>
+    <string name="log_in_no_user_info_found">The User Name or Password is not correct!</string>
+    <string name="intent_user_name">username</string>
+    <string name="intent_password">password</string>
+    <string name="intent_user_log_in">user_login_true</string>
+    <string name="intent_zip_code">zip_code</string>
+    <string name="intent_city_name">city_name</string>
+    <string name="main_page_zip_error">Please input correct Zip Code!</string>
 </resources>
