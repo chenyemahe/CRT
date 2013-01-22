@@ -4,39 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TabWidget
-        android:id="@android:id/tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <FrameLayout
-        android:id="@android:id/tabcontent"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <LinearLayout
+        <TabWidget
+            android:id="@android:id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
 
-            <com.google.android.maps.MapView
-                android:id="@+id/mapview"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:apiKey="@string/map_api_key"
-                android:clickable="true" />
-        </LinearLayout>
-
-        <LinearLayout
+        <FrameLayout
+            android:id="@android:id/tabcontent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content"
+            android:layout_above="@android:id/tabs" >
 
             <ListView
                 android:id="@+id/maplist_restaurants"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </LinearLayout>
-    </FrameLayout>
+        </FrameLayout>
+    </RelativeLayout>
 
 </TabHost>

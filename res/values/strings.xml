@@ -28,10 +28,5 @@
 	<string name="log_in_no_user_name_input">Please type your User Name!</string>
     <string name="log_in_no_password_input">Please type your Password!</string>
     <string name="log_in_no_user_info_found">The User Name or Password is not correct!</string>
-    <string name="intent_user_name">username</string>
-    <string name="intent_password">password</string>
-    <string name="intent_user_log_in">user_login_true</string>
-    <string name="intent_zip_code">zip_code</string>
-    <string name="intent_city_name">city_name</string>
     <string name="main_page_zip_error">Please input correct Zip Code!</string>
 </resources>

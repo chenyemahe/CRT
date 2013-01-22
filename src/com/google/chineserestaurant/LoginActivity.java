@@ -1,5 +1,7 @@
 package com.google.chineserestaurant;
 
+import com.google.chineserestaurant.util.Util;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -74,9 +76,9 @@ public class LoginActivity extends Activity implements OnClickListener {
         }
         if (hasUserInfo(userNameInfo, passwordInfo)) {
             Intent intent = new Intent(this, MainPageActivity.class);
-            intent.putExtra(getResources().getString(R.string.intent_user_log_in), true);
-            intent.putExtra(getResources().getString(R.string.intent_user_name), userNameInfo);
-            intent.putExtra(getResources().getString(R.string.intent_password), passwordInfo);
+            intent.putExtra(Util.Intent_User_log_In, true);
+            intent.putExtra(Util.Intent_User_Name, userNameInfo);
+            intent.putExtra(Util.Intent_Password, passwordInfo);
             startActivity(intent);
         } else {
             Toast.makeText(this, getResources().getString(R.string.log_in_no_user_info_found), Toast.LENGTH_LONG).show();

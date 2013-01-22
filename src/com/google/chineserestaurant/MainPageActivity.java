@@ -1,5 +1,7 @@
 package com.google.chineserestaurant;
 
+import com.google.chineserestaurant.util.Util;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,9 +32,9 @@ public class MainPageActivity extends Activity implements OnClickListener {
         switch (v.getId()) {
         case R.id.location_search:
             if (isZipCode(zip.getText().toString())) {
-                Intent intent = new Intent(this, MapViewActivity.class);
-                intent.putExtra(getResources().getString(R.string.intent_zip_code), zip.getText().toString());
-                intent.putExtra(getResources().getString(R.string.intent_city_name), city.getText().toString());
+                Intent intent = new Intent(this, SearchResultTabActivity.class);
+                intent.putExtra(Util.Intent_Zip_Code, zip.getText().toString());
+                intent.putExtra(Util.Intent_City_Name, city.getText().toString());
                 startActivity(intent);
             }else{
                 Toast.makeText(this, getResources().getString(R.string.main_page_zip_error), Toast.LENGTH_LONG).show();
@@ -42,6 +44,11 @@ public class MainPageActivity extends Activity implements OnClickListener {
 
     }
 
+    /**
+     * true if input is zip code
+     * @param zipCode input in zip
+     * @return boolean
+     */
     private boolean isZipCode(String zipCode) {
         if(zipCode == null || zip.length() != 5) {
             return false;
