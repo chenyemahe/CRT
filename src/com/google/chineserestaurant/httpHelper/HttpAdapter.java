@@ -1,6 +1,7 @@
 package com.google.chineserestaurant.httpHelper;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -23,12 +24,23 @@ public class HttpAdapter {
             HttpResponse httpResponse = null;
             httpResponse = httpClient.execute(get);
 
-            if (httpResponse.getStatusLine().getStatusCode() == 200) {
+            if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 strResult = EntityUtils.toString(httpResponse.getEntity());
             }
         } catch (Exception e) {
             return null;
         }
         return strResult;
+    }
+    
+    public String convertURL(String str) {
+
+        String url = null;
+        try {
+            url = new String(str.trim().replace(" ", "%20"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return url;
     }
 }

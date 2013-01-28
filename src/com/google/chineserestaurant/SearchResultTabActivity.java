@@ -28,12 +28,14 @@ public class SearchResultTabActivity extends TabActivity {
         public void handleMessage(Message msg) {
             if(msg.what == Util.Search_Result_Done) {
                 mRestaurantList = (ArrayList<Restaurant>) msg.obj;
-                Intent intent = new Intent(mActivity, MapViewActivity.class);
-                intent.putExtra(Util.Restaurant_Node_List, mRestaurantList);
+                Intent intent1 = new Intent(mActivity, MapViewActivity.class);
+                intent1.putExtra(Util.Restaurant_Node_List, mRestaurantList);
                 mTabHost.addTab(mTabHost.newTabSpec("Map").setIndicator("Map")
-                        .setContent(intent));
+                        .setContent(intent1));
+                Intent intent2 = new Intent(mActivity, SeResultListViewActivity.class);
+                intent2.putExtra(Util.Restaurant_Node_List, mRestaurantList);
                 mTabHost.addTab(mTabHost.newTabSpec("Result List").setIndicator("Result List")
-                        .setContent(R.id.maplist_restaurants));
+                        .setContent(intent2));
                 mTabHost.setCurrentTab(0);
             }
         }

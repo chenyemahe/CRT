@@ -1,39 +1,19 @@
 package com.google.chineserestaurant.locationHelper;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import com.google.chineserestaurant.httpHelper.HttpAdapter;
 import com.google.chineserestaurant.jsonHelper.JsonAdapter;
 import com.google.chineserestaurant.util.Restaurant;
 import com.google.chineserestaurant.util.Util;
-
 import android.content.Context;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
 
 public class RestaurantFinder {
-
-    private final static String placeSearch_json = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
-    private final static String placeSearch_xml = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=";
-    private final static String api_key = "&key=AIzaSyCAgUdgdGM2_2k96IwK2uhGXcnpGD5Pu6E";
-    private final static String search_type = "chinese restaurants+in+";
-    private final static String sensor_true = "&sensor=true";
 
     private String location;
     private Context context;
@@ -60,27 +40,13 @@ public class RestaurantFinder {
         new Thread(new httpConnect()).start();
     }
 
-    public static String convertURL(String str) {
-
-        String url = null;
-        try {
-            url = new String(str.trim().replace(" ", "%20"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return url;
-    }
-
     private class httpConnect implements Runnable {
-
-        JSONArray jsonArray;
-        JSONObject jsonObject;
-        JSONObject jsonObjectGeo;
-        JSONObject jsonObjectLocation;
 
         @Override
         public void run() {
-            String url = convertURL(placeSearch_json + search_type + location + sensor_true + api_key);
+            String url = mHttpAdatper.convertURL(Util.Place_Text_Search_Json
+                    + Util.Place_Text_Search_Query + location + Util.Place_Sensor_True
+                    + Util.Place_Api_Key);
             String strResult = "";
 
             strResult = mHttpAdatper.httpGet(url);
@@ -100,23 +66,56 @@ public class RestaurantFinder {
          * @param result
          */
         private void setRestaurantList(String result) {
-            jsonArray = mJsonAdapter.getArrayFromJSON(result, "results");
+            JSONArray jsonArray;
+            jsonArray = mJsonAdapter.getJSONArray(result, Util.Place_Request_Result_Results);
             for (int i = 0; i < mJsonAdapter.getNoOfElements(jsonArray); i++) {
-                Restaurant restaurant = new Restaurant();
-                try {
-                    jsonObject = jsonArray.getJSONObject(i);
-                    jsonObjectGeo = jsonObject.getJSONObject("geometry");
-                    jsonObjectLocation = jsonObjectGeo.getJSONObject("location");
-                    restaurant.setLat(jsonObjectLocation.getString("lat"));
-                    restaurant.setLng(jsonObjectLocation.getString("lng"));
-                    mRestaurantList.add(restaurant);
-                } catch (JSONException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                setRestaurantNode(jsonArray, i);
             }
         }
+    }
 
+    /**
+     * set restaurant info to restaurant node
+     * 
+     * @param jsonArray
+     *            restaurant info array
+     * @param index
+     *            index of the restaurant
+     */
+    private void setRestaurantNode(JSONArray jsonArray, int index) {
+        Restaurant restaurant = new Restaurant();
+        JSONObject jsonObject;
+        JSONObject jsonObjectLocation;
+        JSONArray tempArray;
+        try {
+            jsonObject = jsonArray.getJSONObject(index);
+            jsonObjectLocation = mJsonAdapter.getJSONObject(
+                    mJsonAdapter.getJSONObject(jsonObject, Util.Place_Request_Result_Geometry),
+                    Util.Place_Request_Result_Location);
+            restaurant.setLat(mJsonAdapter.getString(jsonObjectLocation, Util.Place_Request_Result_Lat));
+            restaurant.setLng(mJsonAdapter.getString(jsonObjectLocation, Util.Place_Request_Result_Lng));
+            restaurant.setAddress(mJsonAdapter.getString(jsonObject,
+                    Util.Place_Request_Result_Formatted_Address));
+            restaurant.setIcon(mJsonAdapter.getString(jsonObject, Util.Place_Request_Result_Icon));
+            restaurant.setId(mJsonAdapter.getString(jsonObject, Util.Place_Request_Result_Id));
+            restaurant.setName(mJsonAdapter.getString(jsonObject, Util.Place_Request_Result_Name));
+            String openNow = mJsonAdapter.getBoolean(
+                    mJsonAdapter.getJSONObject(jsonObject, Util.Place_Request_Result_Opening_Hours),
+                    Util.Place_Request_Result_Open_Now);
+            if (openNow != null)
+                restaurant.setOpenNow(openNow);
+            restaurant.setPriceLevel(mJsonAdapter.getInt(jsonObject,
+                    Util.Place_Request_Result_Price_Level));
+            restaurant.setRating(mJsonAdapter.getString(jsonObject, Util.Place_Request_Result_Rating));
+            restaurant.setReference(mJsonAdapter.getString(jsonObject,
+                    Util.Place_Request_Result_Reference));
+
+            tempArray = mJsonAdapter.getJSONArray(jsonObject, Util.Place_Request_Result_Type);
+            restaurant.setType(mJsonAdapter.jsonArrayToStringArray(tempArray));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        mRestaurantList.add(restaurant);
     }
 
     private Message prepareMessage(Object meg) {

@@ -38,6 +38,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/Register_Activity" />
         <activity android:name=".SearchResultTabActivity" />
+        <activity android:name=".SeResultListViewActivity" />
     </application>
 
 </manifest>

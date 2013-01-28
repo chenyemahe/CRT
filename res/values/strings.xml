@@ -29,4 +29,7 @@
     <string name="log_in_no_password_input">Please type your Password!</string>
     <string name="log_in_no_user_info_found">The User Name or Password is not correct!</string>
     <string name="main_page_zip_error">Please input correct Zip Code!</string>
+    
+    <string name="restaurant_photo">restaurant_photo</string>
+    <string name="tv_restaurant_rating">Rating: </string>
 </resources>

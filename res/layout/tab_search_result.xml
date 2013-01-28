@@ -19,11 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@android:id/tabs" >
-
-            <ListView
-                android:id="@+id/maplist_restaurants"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
         </FrameLayout>
     </RelativeLayout>
 
