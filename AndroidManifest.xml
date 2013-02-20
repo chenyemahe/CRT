@@ -37,8 +37,10 @@
         <activity android:name=".RegisterActivity"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/Register_Activity" />
-        <activity android:name=".SearchResultTabActivity" />
+        <activity android:name=".SearchResultTabActivity" 
+            android:configChanges="screenSize|orientation"/>
         <activity android:name=".SeResultListViewActivity" />
+        <activity android:name=".ResInfoActivity"></activity>
     </application>
 
 </manifest>

@@ -9,7 +9,9 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
+import com.google.chineserestaurant.locationHelper.LocationHelper;
 import com.google.chineserestaurant.locationHelper.PointItemizedOverlay;
+import com.google.chineserestaurant.locationHelper.RestaurantFinder;
 import com.google.chineserestaurant.util.Restaurant;
 import com.google.chineserestaurant.util.Util;
 
@@ -23,6 +25,7 @@ import android.view.View.OnClickListener;
 public class MapViewActivity extends MapActivity implements LocationListener, OnClickListener {
 
     private ArrayList<Restaurant> mRestaurantList;
+    private String mLocation;
     private MapController mapController;
     private MapView mapView;
     private List<Overlay> mapOverlays;
@@ -33,11 +36,14 @@ public class MapViewActivity extends MapActivity implements LocationListener, On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mapview_activity);
 
-        mRestaurantList = getIntent().getExtras().getParcelableArrayList(Util.Restaurant_Node_List);
+        mRestaurantList = getIntent().getExtras().getParcelableArrayList(Util.Intent_Restaurant_Node_List);
+        mLocation = getIntent().getExtras().getString(Util.Intent_Location);
 
         mapView = (MapView) findViewById(R.id.mapview);
         mapView.setBuiltInZoomControls(true);
         mapController = mapView.getController();
+        mapController.setZoom(13);
+        mapController.animateTo(LocationHelper.getGeoLocation(this, mLocation));
         itemizedOverlay = new PointItemizedOverlay(getResources().getDrawable(R.drawable.restaurant_71));
 
         mapOverlays = mapView.getOverlays();
@@ -49,6 +55,7 @@ public class MapViewActivity extends MapActivity implements LocationListener, On
         // ownerItemizedOverlay = addUserImage(myDrawable, point);
 
         addRestaurant();
+        mapOverlays.add(itemizedOverlay);
 
         mapView.invalidate();
     }
@@ -70,7 +77,6 @@ public class MapViewActivity extends MapActivity implements LocationListener, On
     private void addPointImage(GeoPoint myPoint) {
         OverlayItem overlayitem = new OverlayItem(myPoint, "", "");
         itemizedOverlay.addOverlay(overlayitem);
-        mapOverlays.add(itemizedOverlay);
     }
 
     @Override

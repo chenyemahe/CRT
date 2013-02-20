@@ -14,7 +14,7 @@ public class Restaurant implements Parcelable {
     private String[] mType;
     private double mLat;
     private double mLng;
-    private boolean mIsOpenNow;
+    private String mIsOpenNow;
 
     public String getName() {
         return (mRestaurantName);
@@ -36,7 +36,7 @@ public class Restaurant implements Parcelable {
         return mId;
     }
 
-    public boolean getOpenNow() {
+    public String getOpenNow() {
         return mIsOpenNow;
     }
 
@@ -81,17 +81,15 @@ public class Restaurant implements Parcelable {
     }
 
     public void setOpenNow(String open) {
-        boolean isOpen;
-        if (open.equals("true")) {
-            isOpen = true;
-            this.mIsOpenNow = isOpen;
-        }
-        if (open.equals("false")) {
-            isOpen = false;
-            this.mIsOpenNow = isOpen;
-        }
+            this.mIsOpenNow = open;
     }
 
+    public boolean stringToBoolean(String s){
+        if (s.equals("true")) {
+            return true;
+        }
+        return false;
+    }
     public void setIcon(String icon) {
         this.mIconUrl = icon;
     }
@@ -113,7 +111,7 @@ public class Restaurant implements Parcelable {
     }
 
     public void setValue(String name, String address, String icon, String id, int priceLevel,
-            String rating, String reference, String[] type, double lat, double lng, boolean isOpen) {
+            String rating, String reference, String[] type, double lat, double lng, String isOpen) {
         this.mRestaurantName = name;
         this.mRestaurantAddress = address;
         this.mIconUrl = icon;

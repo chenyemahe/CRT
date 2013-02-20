@@ -16,7 +16,7 @@ import android.widget.TabHost;
 @SuppressWarnings("deprecation")
 public class SearchResultTabActivity extends TabActivity {
 
-    private String zip;
+    private static String zip;
     private String city;
     private LocationHelper mLocationHelper;
     private static TabHost mTabHost;
@@ -28,14 +28,15 @@ public class SearchResultTabActivity extends TabActivity {
         public void handleMessage(Message msg) {
             if(msg.what == Util.Search_Result_Done) {
                 mRestaurantList = (ArrayList<Restaurant>) msg.obj;
-                Intent intent1 = new Intent(mActivity, MapViewActivity.class);
-                intent1.putExtra(Util.Restaurant_Node_List, mRestaurantList);
+                Intent mapIntent1 = new Intent(mActivity, MapViewActivity.class);
+                mapIntent1.putExtra(Util.Intent_Restaurant_Node_List, mRestaurantList);
+                mapIntent1.putExtra(Util.Intent_Location, zip);
                 mTabHost.addTab(mTabHost.newTabSpec("Map").setIndicator("Map")
-                        .setContent(intent1));
-                Intent intent2 = new Intent(mActivity, SeResultListViewActivity.class);
-                intent2.putExtra(Util.Restaurant_Node_List, mRestaurantList);
+                        .setContent(mapIntent1));
+                Intent listIntent = new Intent(mActivity, SeResultListViewActivity.class);
+                listIntent.putExtra(Util.Intent_Restaurant_Node_List, mRestaurantList);
                 mTabHost.addTab(mTabHost.newTabSpec("Result List").setIndicator("Result List")
-                        .setContent(intent2));
+                        .setContent(listIntent));
                 mTabHost.setCurrentTab(0);
             }
         }

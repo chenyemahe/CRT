@@ -11,13 +11,14 @@ public final class R {
     public static final class attr {
     }
     public static final class dimen {
-        public static final int padding_large=0x7f040002;
-        public static final int padding_medium=0x7f040001;
-        public static final int padding_small=0x7f040000;
-        public static final int register_margin=0x7f040004;
-        public static final int table_row_login_padding=0x7f040003;
-        public static final int textview_register_font_size=0x7f040005;
-        public static final int textview_register_sub_font_size=0x7f040006;
+        public static final int padding_large=0x7f040003;
+        public static final int padding_medium=0x7f040002;
+        public static final int padding_small=0x7f040001;
+        public static final int padding_x_small=0x7f040000;
+        public static final int register_margin=0x7f040005;
+        public static final int table_row_login_padding=0x7f040004;
+        public static final int textview_register_font_size=0x7f040006;
+        public static final int textview_register_sub_font_size=0x7f040007;
     }
     public static final class drawable {
         public static final int app_icon=0x7f020000;
@@ -50,9 +51,8 @@ public final class R {
         public static final int iv_restaurant_photo=0x7f080001;
         public static final int locationView=0x7f08001a;
         public static final int location_search=0x7f080019;
-        public static final int maplist_restaurants=0x7f080026;
         public static final int mapview=0x7f08001b;
-        public static final int menu_settings=0x7f080027;
+        public static final int menu_settings=0x7f080026;
         public static final int password=0x7f080020;
         public static final int rb_restaurant_rating=0x7f080006;
         public static final int register_sub_title=0x7f08001d;
@@ -80,8 +80,9 @@ public final class R {
         public static final int mainpage_activity=0x7f030003;
         public static final int mapview_activity=0x7f030004;
         public static final int register_activity=0x7f030005;
-        public static final int se_result_list_activity=0x7f030006;
-        public static final int tab_search_result=0x7f030007;
+        public static final int res_info_activity=0x7f030006;
+        public static final int se_result_list_activity=0x7f030007;
+        public static final int tab_search_result=0x7f030008;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;
